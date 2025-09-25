@@ -1,8 +1,10 @@
-import { CalendarDays, AlertTriangle, MapPin } from 'lucide-react';
+import { CalendarDays, MapPin } from 'lucide-react';
 
 import { useLocationStore } from '../store/location';
 import { useWeeklyWeather } from '../hooks/useWeeklyWeather';
 import WeatherDayCard from '../components/weather/WeatherDayCard';
+import Loading from '../components/info/Loading';
+import AlertCard from '../components/info/AlertCard';
 
 export default function Weekly() {
   const { location } = useLocationStore();
@@ -16,23 +18,13 @@ export default function Weekly() {
   if (!location) {
     return (
       <div className='max-w-4xl mx-auto'>
-        <div className='rounded-3xl bg-orange-50 ring-1 ring-orange-100 p-6 md:p-8'>
-          <div className='flex items-start gap-3'>
-            <AlertTriangle className='text-orange-600 mt-0.5' />
-            <div>
-              <h2 className='text-xl font-semibold text-slate-900'>
-                No location set
-              </h2>
-              <p className='text-slate-600 mt-1'>
-                Go to{' '}
-                <a href='/' className='text-orange-700 underline'>
-                  Home
-                </a>{' '}
-                and pick a location to see the weekly forecast.
-              </p>
-            </div>
-          </div>
-        </div>
+        <AlertCard variant='info' title='No location set'>
+          Go to{' '}
+          <a href='/' className='text-orange-700 underline'>
+            Home
+          </a>{' '}
+          and pick a location to see the hourly forecast.
+        </AlertCard>
       </div>
     );
   }
@@ -40,19 +32,7 @@ export default function Weekly() {
   if (loading) {
     return (
       <div className='max-w-5xl mx-auto'>
-        <div className='rounded-3xl bg-white shadow-xl ring-1 ring-orange-100 p-6 md:p-8'>
-          <div className='animate-pulse space-y-4'>
-            <div className='h-6 w-1/3 bg-slate-200 rounded' />
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-              {[...Array(8)].map((_, i) => (
-                <div
-                  key={i}
-                  className='rounded-2xl p-4 ring-1 ring-orange-100 bg-orange-50/60 h-32'
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        <Loading lines={6} />
       </div>
     );
   }
@@ -60,17 +40,9 @@ export default function Weekly() {
   if (error) {
     return (
       <div className='max-w-4xl mx-auto'>
-        <div className='rounded-3xl bg-white shadow-xl ring-1 ring-red-100 p-6 md:p-8'>
-          <div className='flex items-start gap-3'>
-            <AlertTriangle className='text-red-600 mt-0.5' />
-            <div>
-              <h2 className='text-xl font-semibold text-slate-900'>
-                Couldn’t load weekly forecast
-              </h2>
-              <p className='text-slate-600 mt-1'>{error}</p>
-            </div>
-          </div>
-        </div>
+        <AlertCard variant='error' title='Couldn’t load hourly forecast'>
+          {error || 'Unknown error'}
+        </AlertCard>
       </div>
     );
   }
