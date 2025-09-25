@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Current from './pages/Current';
+import Hourly from './pages/Hourly';
 import Weekly from './pages/Weekly';
-import Monthly from './pages/Monthly';
 import Details from './pages/Details';
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
           <Route element={<Layout />}>
             <Route path='/' element={<Home />} />
             <Route path='/current' element={<Current />} />
+            <Route path='/hourly' element={<Hourly />} />
             <Route path='/weekly' element={<Weekly />} />
-            <Route path='/monthly' element={<Monthly />} />
             <Route path='/details' element={<Details />} />
           </Route>
         </Routes>

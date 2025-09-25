@@ -8,12 +8,10 @@ export default function Navbar() {
   return (
     <header className='bg-white shadow-md'>
       <nav className='container mx-auto flex items-center justify-between px-4 py-3'>
-        {/* Logo */}
         <div className='text-xl font-bold text-orange-600 flex items-center gap-2'>
           WeatherApp
         </div>
 
-        {/* Hamburger button (mobile) */}
         <button
           className='md:hidden text-orange-600 focus:outline-none'
           onClick={() => setIsOpen(!isOpen)}
@@ -21,7 +19,6 @@ export default function Navbar() {
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        {/* Links */}
         <div
           className={`${
             isOpen ? 'block' : 'hidden'
@@ -31,8 +28,8 @@ export default function Navbar() {
             {[
               { to: '/', label: 'Home', end: true },
               { to: '/current', label: 'Current' },
+              { to: '/hourly', label: 'Hourly' },
               { to: '/weekly', label: 'Week' },
-              { to: '/monthly', label: 'Month' },
               { to: '/details', label: 'Details' },
             ].map(({ to, label, end }) => (
               <li key={to}>
