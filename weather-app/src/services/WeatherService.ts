@@ -14,8 +14,6 @@ export class WeatherService {
     lon: number,
     units: Units = 'metric'
   ): Promise<WeatherCurrentResponse> {
-    console.log('API Key:', this.key);
-
     const params = new URLSearchParams({
       lat: String(lat),
       lon: String(lon),

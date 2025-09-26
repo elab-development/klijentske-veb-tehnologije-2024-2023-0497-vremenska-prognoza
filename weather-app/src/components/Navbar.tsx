@@ -21,7 +21,7 @@ export default function Navbar() {
 
         <div
           className={`${
-            isOpen ? 'block' : 'hidden'
+            isOpen ? 'block z-50' : 'hidden'
           } absolute top-14 left-0 w-full bg-white shadow-md md:static md:block md:w-auto md:shadow-none`}
         >
           <ul className='flex flex-col md:flex-row md:space-x-6'>
